@@ -30,6 +30,12 @@ async def index() -> FileResponse:
     return FileResponse(DIST / "index.html")
 
 
+@app.get("/api/health")
+async def health() -> dict:
+    # Cheap: no Temporal call, so the page stays up while workers or Temporal are away.
+    return {"status": "ok", "taskQueue": TASK_QUEUE}
+
+
 @app.get("/api/greet/{name}")
 async def greet(name: str) -> dict:
     client = await get_client()
