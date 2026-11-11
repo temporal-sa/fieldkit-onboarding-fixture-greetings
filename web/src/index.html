@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Greetings</title></head>
+<body>
+<h1>Temporal greetings</h1>
+<input id="name" value="world"><button id="go">Greet</button>
+<p id="out"></p>
+<script>
+document.getElementById("go").onclick = async () => {
+  const r = await fetch(`/api/greet/${encodeURIComponent(document.getElementById("name").value)}`);
+  document.getElementById("out").textContent = (await r.json()).greeting;
+};
+</script>
+</body>
+</html>
